@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -25,8 +26,14 @@ class OfferType extends AbstractType
             ])
             ->add('categories', EntityType::class, [
                 'class' => 'AppBundle\Entity\Category',
-                'choice_label' => 'name'
-            ]);
+                'choice_label' => 'name',
+                'multiple' => true,
+            ])
+//            ->add('categories', CollectionType::class, [
+//                'entry_type'   => CategoryType::class,
+//                'allow_add' => true,
+//            ])
+        ;
     }
     
     /**
