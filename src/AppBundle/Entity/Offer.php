@@ -59,7 +59,7 @@ class Offer
 
     public function __construct()
     {
-        $this->user = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     /**
