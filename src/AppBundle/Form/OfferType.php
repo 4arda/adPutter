@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,7 +18,15 @@ class OfferType extends AbstractType
             ->add('title')
             ->add('description')
             ->add('imageUrl')
-            ->add('expireDate');
+            ->add('expireDate')
+            ->add('user', EntityType::class, [
+                'class' => 'AppBundle\Entity\User',
+                'choice_label' => 'name'
+            ])
+            ->add('categories', EntityType::class, [
+                'class' => 'AppBundle\Entity\Category',
+                'choice_label' => 'name'
+            ]);
     }
     
     /**
