@@ -7,7 +7,6 @@
         <th>Description</th>
         <th>Imageurl</th>
         <th>Expiredate</th>
-        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -16,18 +15,8 @@
             <td><a href="{{ path('offer_show', { 'id': offer.id }) }}">{{ offer.id }}</a></td>
             <td>{{ offer.title }}</td>
             <td>{{ offer.description }}</td>
-            <td>{{ offer.imageUrl }}</td>
+            <td><img height="100px" width="100px" src="{{ offer.imageUrl }}"></td>
             <td>{% if offer.expireDate %}{{ offer.expireDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('offer_show', { 'id': offer.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('offer_edit', { 'id': offer.id }) }}">edit</a>
-                    </li>
-                </ul>
-            </td>
         </tr>
     {% endfor %}
     </tbody>

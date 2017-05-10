@@ -1,0 +1,9 @@
+{% for offer in offers %}
+    <tr>
+        <td><a href="{{ path('offer_show', { 'id': offer.id }) }}">{{ offer.id }}</a></td>
+        <td>{{ offer.title }}</td>
+        <td>{{ offer.description }}</td>
+        <td>{{ offer.imageUrl }}</td>
+        <td>{% if offer.expireDate %}{{ offer.expireDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+    </tr>
+{% endfor %}

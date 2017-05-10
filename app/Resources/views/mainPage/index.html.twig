@@ -1,5 +1,4 @@
-{% extends "base.html.twig" %}
-{% block body %}
-{{ include(':mainPage:navbar.html.twig') }}
+{% extends "bootstrap.html.twig" %}
+{% block center %}
 {{ render(controller('AppBundle:Offer:index')) }}
 {% endblock %}
