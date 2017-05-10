@@ -42,8 +42,15 @@ class Category
      */
     private $parent;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Offer", inversedBy="categories")
+     * @ORM\JoinColumn(name="category_offer")
+     */
+    private $offers;
+
     public function __construct() {
         $this->children = new ArrayCollection();
+        $this->offers = new ArrayCollection();
     }
 
 
@@ -139,5 +146,38 @@ class Category
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * Add offers
+     *
+     * @param \AppBundle\Entity\Offer $offers
+     * @return Category
+     */
+    public function addOffer(\AppBundle\Entity\Offer $offers)
+    {
+        $this->offers[] = $offers;
+
+        return $this;
+    }
+
+    /**
+     * Remove offers
+     *
+     * @param \AppBundle\Entity\Offer $offers
+     */
+    public function removeOffer(\AppBundle\Entity\Offer $offers)
+    {
+        $this->offers->removeElement($offers);
+    }
+
+    /**
+     * Get offers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOffers()
+    {
+        return $this->offers;
     }
 }

@@ -42,8 +42,15 @@ class Category
      */
     private $parent;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Offer", inversedBy="categories")
+     * @ORM\JoinColumn(name="category_offer")
+     */
+    private $offers;
+
     public function __construct() {
         $this->children = new ArrayCollection();
+        $this->offers = new ArrayCollection();
     }
 
 
@@ -76,6 +83,67 @@ class Category
      * @return string 
      */
     public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Add children
+     *
+     * @param \AppBundle\Entity\Category $children
+     * @return Category
+     */
+    public function addChild(\AppBundle\Entity\Category $children)
+    {
+        $this->children[] = $children;
+
+        return $this;
+    }
+
+    /**
+     * Remove children
+     *
+     * @param \AppBundle\Entity\Category $children
+     */
+    public function removeChild(\AppBundle\Entity\Category $children)
+    {
+        $this->children->removeElement($children);
+    }
+
+    /**
+     * Get children
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \AppBundle\Entity\Category $parent
+     * @return Category
+     */
+    public function setParent(\AppBundle\Entity\Category $parent = null)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \AppBundle\Entity\Category 
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    public function __toString()
     {
         return $this->name;
     }
