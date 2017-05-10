@@ -219,4 +219,9 @@ class Offer
     {
         return $this->categories;
     }
+
+    public function __toString()
+    {
+        return (string)$this->getId(). " ". $this->getTitle();
+    }
 }
