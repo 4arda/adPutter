@@ -35,6 +35,15 @@ class Offer
      */
     private $description;
 
+    /**
+     * @ORM\Column(name="image_url", type="string", length=511)
+     */
+    private $imageUrl;
+
+    /**
+     * @ORM\Column(name="expire_date", type="datetime")
+     */
+    private $expireDate;
 
     /**
      * Get id
@@ -90,5 +99,51 @@ class Offer
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set imageUrl
+     *
+     * @param string $imageUrl
+     * @return Offer
+     */
+    public function setImageUrl($imageUrl)
+    {
+        $this->imageUrl = $imageUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get imageUrl
+     *
+     * @return string 
+     */
+    public function getImageUrl()
+    {
+        return $this->imageUrl;
+    }
+
+    /**
+     * Set expireDate
+     *
+     * @param \DateTime $expireDate
+     * @return Offer
+     */
+    public function setExpireDate($expireDate)
+    {
+        $this->expireDate = $expireDate;
+
+        return $this;
+    }
+
+    /**
+     * Get expireDate
+     *
+     * @return \DateTime 
+     */
+    public function getExpireDate()
+    {
+        return $this->expireDate;
     }
 }
