@@ -37,7 +37,7 @@ class Offer
     private $description;
 
     /**
-     * @ORM\Column(name="image_url", type="string", length=511)
+     * @ORM\Column(name="image_url", type="string", length=511, nullable=true)
      */
     private $imageUrl;
 
