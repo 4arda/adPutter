@@ -1,5 +1,5 @@
 {% extends "base.html.twig" %}
 {% block body %}
 {{ include(':mainPage:navbar.html.twig') }}
-
+{{ render(controller('AppBundle:Offer:index')) }}
 {% endblock %}

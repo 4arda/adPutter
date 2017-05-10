@@ -1,45 +1,35 @@
-{% extends 'base.html.twig' %}
+<h1>Offers list</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Imageurl</th>
+        <th>Expiredate</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for offer in offers %}
+        <tr>
+            <td><a href="{{ path('offer_show', { 'id': offer.id }) }}">{{ offer.id }}</a></td>
+            <td>{{ offer.title }}</td>
+            <td>{{ offer.description }}</td>
+            <td>{{ offer.imageUrl }}</td>
+            <td>{% if offer.expireDate %}{{ offer.expireDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('offer_show', { 'id': offer.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('offer_edit', { 'id': offer.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 
-{% block body %}
-    <h1>Offers list</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Imageurl</th>
-                <th>Expiredate</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for offer in offers %}
-            <tr>
-                <td><a href="{{ path('offer_show', { 'id': offer.id }) }}">{{ offer.id }}</a></td>
-                <td>{{ offer.title }}</td>
-                <td>{{ offer.description }}</td>
-                <td>{{ offer.imageUrl }}</td>
-                <td>{% if offer.expireDate %}{{ offer.expireDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('offer_show', { 'id': offer.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('offer_edit', { 'id': offer.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('offer_new') }}">Create a new offer</a>
-        </li>
-    </ul>
-{% endblock %}
