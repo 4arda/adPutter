@@ -53,7 +53,7 @@ class Offer
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Category", mappedBy="offers")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Category", inversedBy="offers")
      */
     private $categories;
 
@@ -180,7 +180,7 @@ class Offer
     /**
      * Get user
      *
-     * @return \AppBundle\Entity\User 
+     * @return \AppBundle\Entity\User
      */
     public function getUser()
     {

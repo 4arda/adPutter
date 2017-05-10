@@ -21,7 +21,7 @@ class OfferType extends AbstractType
             ->add('expireDate')
             ->add('user', EntityType::class, [
                 'class' => 'AppBundle\Entity\User',
-                'choice_label' => 'name'
+                'choice_label' => 'username'
             ])
             ->add('categories', EntityType::class, [
                 'class' => 'AppBundle\Entity\Category',
