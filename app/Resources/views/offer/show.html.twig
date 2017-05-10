@@ -17,6 +17,14 @@
                 <th>Description</th>
                 <td>{{ offer.description }}</td>
             </tr>
+            <tr>
+                <th>Imageurl</th>
+                <td>{{ offer.imageUrl }}</td>
+            </tr>
+            <tr>
+                <th>Expiredate</th>
+                <td>{% if offer.expireDate %}{{ offer.expireDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
         </tbody>
     </table>
 
