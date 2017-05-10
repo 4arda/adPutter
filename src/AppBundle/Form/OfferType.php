@@ -20,19 +20,15 @@ class OfferType extends AbstractType
             ->add('description')
             ->add('imageUrl')
             ->add('expireDate')
-            ->add('user', EntityType::class, [
-                'class' => 'AppBundle\Entity\User',
-                'choice_label' => 'username'
-            ])
+//            ->add('user', EntityType::class, [
+//                'class' => 'AppBundle\Entity\User',
+//                'choice_label' => 'username'
+//            ])
             ->add('categories', EntityType::class, [
                 'class' => 'AppBundle\Entity\Category',
                 'choice_label' => 'name',
                 'multiple' => true,
             ])
-//            ->add('categories', CollectionType::class, [
-//                'entry_type'   => CategoryType::class,
-//                'allow_add' => true,
-//            ])
         ;
     }
     

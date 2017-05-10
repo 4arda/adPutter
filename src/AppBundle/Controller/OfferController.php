@@ -6,6 +6,7 @@ use AppBundle\Entity\Offer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Offer controller.
@@ -36,15 +37,18 @@ class OfferController extends Controller
      *
      * @Route("/new", name="offer_new")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
      */
     public function newAction(Request $request)
     {
+        $user = $this->getUser();
         $offer = new Offer();
         $form = $this->createForm('AppBundle\Form\OfferType', $offer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $offer->setUser($user);
             $em->persist($offer);
             $em->flush();
 
@@ -132,5 +136,10 @@ class OfferController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    public function getUser()
+    {
+        return parent::getUser();
     }
 }
