@@ -1,8 +1,13 @@
+{% if app.user %}
+    <li>
+        <a href="#">{{ app.user.username }}</a>
+    </li>
+{% endif %}
 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
     <li>
         {#{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |#}
         <a href="{{ path('fos_user_security_logout') }}">
-            <span class="glyphicon glyphicon-log-in"></span>
+            <span class="glyphicon glyphicon-log-out"></span>
             {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
         </a>
     </li>
@@ -13,4 +18,5 @@
             {{ 'layout.login'|trans({}, 'FOSUserBundle') }}
         </a>
     </li>
+
 {% endif %}
