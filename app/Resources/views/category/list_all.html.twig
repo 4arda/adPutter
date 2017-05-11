@@ -1,0 +1,17 @@
+<div class="container-fluid">
+    <h4>Categories list</h4>
+    {% for category in categories %}
+        <ul>
+            {% if not category.parent %}
+                <li><a href="{{ path('category_show', { 'id': category.id }) }}">{{ category.name }}</a>
+                    <ul>
+                        {% for category in category.children %}
+                            <li><a href="{{ path('category_show', { 'id': category.id }) }}">{{ category.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endif %}
+        </ul>
+    {% endfor %}
+</div>

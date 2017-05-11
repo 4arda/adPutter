@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Category;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -14,6 +15,20 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  */
 class CategoryController extends Controller
 {
+    /**
+     * @Template(":category:list_all.html.twig")
+     */
+    public function listAllAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $categories = $em->getRepository('AppBundle:Category')->findAll();
+
+        return $this->render('category/list_all.html.twig', array(
+            'categories' => $categories,
+        ));
+    }
+
     /**
      * Lists all category entities.
      *
