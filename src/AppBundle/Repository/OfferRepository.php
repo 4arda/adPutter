@@ -38,4 +38,16 @@ class OfferRepository extends EntityRepository
             ->setParameter('userId', $userId)
             ->getResult();
     }
+
+    public function findUserOffer($id,$userId)
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT o FROM AppBundle:Offer o 
+                      WHERE o.id =:id AND o.user=:userId'
+            )
+            ->setParameter('id', $id)
+            ->setParameter('userId', $userId)
+            ->getResult();
+    }
 }

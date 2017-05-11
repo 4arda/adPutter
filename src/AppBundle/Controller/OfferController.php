@@ -35,12 +35,8 @@ class OfferController extends Controller
     public function listInCategoryAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $offers = $em->getRepository('AppBundle:Offer')->findAllByCategoryId($id);
-
-        return $this->render('offer/list_all.html.twig', array(
-            'offers' => $offers,
-        ));
+        return $this->render('offer/list_all.html.twig', array('offers' => $offers));
     }
 
     public function listUserAction()
@@ -94,10 +90,9 @@ class OfferController extends Controller
      * @Route("/{id}", name="offer_show")
      * @Method("GET")
      */
-    public function showAction(Offer $offer)
+    public function showUserAction(Offer $offer)
     {
         $deleteForm = $this->createDeleteForm($offer);
-
         return $this->render('offer/show.html.twig', array(
             'offer' => $offer,
             'delete_form' => $deleteForm->createView(),
