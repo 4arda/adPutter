@@ -1,7 +1,7 @@
 {% extends "bootstrap.html.twig" %}
 {% block left %}
-    {{ render(controller('AppBundle:Category:listAllCategories')) }}
+    {{ render(controller('AppBundle:Category:listAll')) }}
 {% endblock %}
 {% block center %}
-    {{ render(controller('AppBundle:Offer:index')) }}
+    {{ render(controller('AppBundle:Offer:listAll')) }}
 {% endblock %}

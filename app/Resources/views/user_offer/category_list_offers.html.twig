@@ -1,7 +1,7 @@
 {% extends "bootstrap.html.twig" %}
 {% block left %}
-    {{ render(controller('AppBundle:Category:listAllCategories')) }}
+    {{ render(controller('AppBundle:Category:listOnlylUser')) }}
 {% endblock %}
 {% block center %}
-    {{ render(controller('AppBundle:Offer:listUserOffersByCategory', {'id':id})) }}
+    {{ render(controller('AppBundle:Offer:listUserByCategory', {'id':id})) }}
 {% endblock %}

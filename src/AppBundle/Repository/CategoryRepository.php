@@ -12,4 +12,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
+    public function findOnlyUser($id)
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT c FROM AppBundle:Category c 
+                      LEFT JOIN c.offers o
+                      WHERE o.user =:id'
+            )
+            ->setParameter('id', $id)
+            ->getResult();
+    }
 }

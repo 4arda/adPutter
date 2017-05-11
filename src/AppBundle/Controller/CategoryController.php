@@ -15,10 +15,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  */
 class CategoryController extends Controller
 {
-    /**
-     *
-     */
-    public function listAllCategoriesAction()
+
+    public function listAllAction()
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -27,6 +25,14 @@ class CategoryController extends Controller
         return $this->render('category/list_all.html.twig', array(
             'categories' => $categories,
         ));
+    }
+
+    public function listOnlylUserAction()
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $categories = $em->getRepository("AppBundle:Category")->findOnlyUser($user->getId());
+        return $this->render('category/list_all_user.html.twig', array('categories' => $categories));
     }
 
     /**
@@ -80,11 +86,8 @@ class CategoryController extends Controller
      */
     public function showAction(Category $category)
     {
-        $deleteForm = $this->createDeleteForm($category);
-
         return $this->render('category/show.html.twig', array(
             'category' => $category,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 

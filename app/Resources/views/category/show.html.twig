@@ -1,8 +1,8 @@
 {% extends 'bootstrap.html.twig' %}
 {% block left %}
-    {{ render(controller("AppBundle:Category:listAllCategories")) }}
+    {{ render(controller("AppBundle:Category:listAll")) }}
 {% endblock %}
 {% block center %}
     <h1>Category {{ category.name }}</h1>
-    {{ render(controller("AppBundle:Offer:showAllInCategory", {'id':category.id})) }}
+    {{ render(controller("AppBundle:Offer:listInCategory", {'id':category.id})) }}
 {% endblock %}

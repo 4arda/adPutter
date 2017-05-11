@@ -21,42 +21,42 @@ class OfferController extends Controller
      * @Route("/", name="offer_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function listAllAction()
     {
         $em = $this->getDoctrine()->getManager();
 
         $offers = $em->getRepository('AppBundle:Offer')->findAll();
 
-        return $this->render('offer/index.html.twig', array(
+        return $this->render('offer/list_all.html.twig', array(
             'offers' => $offers,
         ));
     }
 
-    public function showAllInCategoryAction($id)
+    public function listInCategoryAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
         $offers = $em->getRepository('AppBundle:Offer')->findAllByCategoryId($id);
 
-        return $this->render('offer/index.html.twig', array(
+        return $this->render('offer/list_all.html.twig', array(
             'offers' => $offers,
         ));
     }
 
-    public function listUserOffersAction()
+    public function listUserAction()
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $offers = $em->getRepository("AppBundle:Offer")->findBy(['user' => $user->getId()]);
-        return $this->render('offer/index.html.twig', array('offers' => $offers));
+        return $this->render('offer/list_all.html.twig', array('offers' => $offers));
     }
 
-    public function listUserOffersByCategoryAction($id)
+    public function listUserByCategoryAction($id)
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $offers = $em->getRepository('AppBundle:Offer')->findAllByUserAndCategoryId($id, $user->getId());
-        return $this->render('offer/index.html.twig', array('offers' => $offers));
+        return $this->render('offer/list_all.html.twig', array('offers' => $offers));
     }
 
     /**
