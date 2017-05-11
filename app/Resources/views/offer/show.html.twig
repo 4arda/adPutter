@@ -1,0 +1,32 @@
+{% extends "bootstrap.html.twig" %}
+{% block center %}
+    <h1>Offer</h1>
+
+    <table>
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ offer.id }}</td>
+        </tr>
+        <tr>
+            <th>Title</th>
+            <td>{{ offer.title }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ offer.description }}</td>
+        </tr>
+        <tr>
+            <th>Expiredate</th>
+            <td>{% if offer.expireDate %}{{ offer.expireDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('app_mainpage_index') }}">Back to the list</a>
+        </li>
+    </ul>
+    <img src="{{ offer.imageUrl }}"/>
+{% endblock %}

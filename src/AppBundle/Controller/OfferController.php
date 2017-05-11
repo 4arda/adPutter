@@ -92,10 +92,8 @@ class OfferController extends Controller
      */
     public function showAction(Offer $offer)
     {
-        $deleteForm = $this->createDeleteForm($offer);
-        return $this->render('offer/_show.html.twig', array(
+        return $this->render('offer/show.html.twig', array(
             'offer' => $offer,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
