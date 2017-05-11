@@ -43,7 +43,7 @@ class Category
     private $parent;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Offer", inversedBy="categories")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Offer", mappedBy="categories")
      * @ORM\JoinColumn(name="category_offer")
      */
     private $offers;
