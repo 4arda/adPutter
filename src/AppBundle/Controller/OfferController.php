@@ -33,6 +33,20 @@ class OfferController extends Controller
     }
 
     /**
+     *
+     */
+    public function showAllInCategoryAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $offers = $em->getRepository('AppBundle:Offer')->findAllByCategoryId($id);
+
+        return $this->render('offer/index.html.twig', array(
+            'offers' => $offers,
+        ));
+    }
+
+    /**
      * Creates a new offer entity.
      *
      * @Route("/new", name="offer_new")

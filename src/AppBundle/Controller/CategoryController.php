@@ -16,9 +16,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 class CategoryController extends Controller
 {
     /**
-     * @Template(":category:list_all.html.twig")
+     *
      */
-    public function listAllAction()
+    public function listAllCategoriesAction()
     {
         $em = $this->getDoctrine()->getManager();
 

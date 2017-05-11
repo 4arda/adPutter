@@ -12,4 +12,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class OfferRepository extends EntityRepository
 {
+    public function findAllByCategoryId($id)
+    {
+
+
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT o, c FROM AppBundle:Offer o 
+                      LEFT JOIN o.categories c
+                      WHERE c.id =:id'
+            )
+            ->setParameter('id', $id)
+            ->getResult();
+    }
 }
