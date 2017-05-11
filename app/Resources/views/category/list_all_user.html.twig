@@ -3,7 +3,7 @@
     {% for category in categories %}
         <ul>
             {% if not category.parent %}
-                <li><a href="{{ path('category_show', { 'id': category.id }) }}">{{ category.name }}</a>
+                <li><a href="{{ path('app_useroffer_showcategory', { 'id': category.id }) }}">{{ category.name }}</a>
                     <ul>
                         {% for category in category.children %}
                             <li><a href="{{ path('app_useroffer_showcategory', { 'id': category.id }) }}">{{ category.name }}</a>
