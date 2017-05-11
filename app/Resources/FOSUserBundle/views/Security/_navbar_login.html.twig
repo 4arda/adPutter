@@ -1,6 +1,6 @@
 {% if app.user %}
     <li>
-        <a href="#">{{ app.user.username }}</a>
+        <a href="{{ path('app_useroffer_index') }}">{{ app.user.username }}</a>
     </li>
 {% endif %}
 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
@@ -18,5 +18,4 @@
             {{ 'layout.login'|trans({}, 'FOSUserBundle') }}
         </a>
     </li>
-
 {% endif %}

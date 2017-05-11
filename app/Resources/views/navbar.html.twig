@@ -1,0 +1,21 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar">1</span>
+            </button>
+            <a class="navbar-brand" href="{{ path('app_mainpage_index') }}">adPutter</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="{{ path('offer_new') }}">New Offer</a></li>
+                <li class="active"><a href="{{ path('category_index') }}">All Categories</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% block login %}
+                    {{ include('@FOSUser/Security/_navbar_login.html.twig') }}
+                {% endblock %}
+            </ul>
+        </div>
+    </div>
+</nav>
