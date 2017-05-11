@@ -14,8 +14,6 @@ class OfferRepository extends EntityRepository
 {
     public function findAllByCategoryId($id)
     {
-
-
         return $this->getEntityManager()
             ->createQuery(
                 'SELECT o, c FROM AppBundle:Offer o 
@@ -23,6 +21,21 @@ class OfferRepository extends EntityRepository
                       WHERE c.id =:id'
             )
             ->setParameter('id', $id)
+            ->getResult();
+    }
+
+    public function findAllByUserAndCategoryId($id, $userId)
+    {
+
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT o, c FROM AppBundle:Offer o 
+                      LEFT JOIN o.categories c
+                      WHERE c.id =:id
+                      AND o.user=:userId'
+            )
+            ->setParameter('id', $id)
+            ->setParameter('userId', $userId)
             ->getResult();
     }
 }

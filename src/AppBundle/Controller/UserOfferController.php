@@ -14,9 +14,23 @@ class UserOfferController extends Controller
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-        $userOffers = $em->getRepository("AppBundle:Offer")->findBy(['user' => $user->getId()]);
-        return $this->render('user_offer/list_offers.html.twig', array('offers' => $userOffers));
+        $offers = $em->getRepository("AppBundle:Offer")->findBy(['user' => $user->getId()]);
+        return $this->render('user_offer/list_offers.html.twig', array('offers' => $offers));
     }
+
+    /**
+     * @Route("/category/{id}/my/offers/")
+     */
+    public function showCategoryOffersAction($id)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $offers = $em->getRepository("AppBundle:Offer")->findBy(['user' => $user->getId()]);
+        return $this->render('user_offer/category_list_offers.html.twig',
+            array('offers' => $offers, 'id' => $id));
+    }
+
+
 
     public function getUser()
     {

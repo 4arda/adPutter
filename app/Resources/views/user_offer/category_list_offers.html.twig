@@ -1,0 +1,7 @@
+{% extends "bootstrap.html.twig" %}
+{% block left %}
+    {{ render(controller('AppBundle:Category:listAllCategories')) }}
+{% endblock %}
+{% block center %}
+    {{ render(controller('AppBundle:Offer:listUserOffersByCategory', {'id':id})) }}
+{% endblock %}
