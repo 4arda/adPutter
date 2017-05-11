@@ -27,7 +27,7 @@ class OfferController extends Controller
 
         $offers = $em->getRepository('AppBundle:Offer')->findAll();
 
-        return $this->render('offer/list_all.html.twig', array(
+        return $this->render(':offer:_list_all.html.twig', array(
             'offers' => $offers,
         ));
     }
@@ -36,7 +36,7 @@ class OfferController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $offers = $em->getRepository('AppBundle:Offer')->findAllByCategoryId($id);
-        return $this->render('offer/list_all.html.twig', array('offers' => $offers));
+        return $this->render(':offer:_list_all.html.twig', array('offers' => $offers));
     }
 
     public function listUserAction()
@@ -44,7 +44,7 @@ class OfferController extends Controller
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $offers = $em->getRepository("AppBundle:Offer")->findBy(['user' => $user->getId()]);
-        return $this->render('offer/list_all.html.twig', array('offers' => $offers));
+        return $this->render(':offer:_list_all_user.html.twig', array('offers' => $offers));
     }
 
     public function listUserByCategoryAction($id)
@@ -52,7 +52,7 @@ class OfferController extends Controller
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $offers = $em->getRepository('AppBundle:Offer')->findAllByUserAndCategoryId($id, $user->getId());
-        return $this->render('offer/list_all.html.twig', array('offers' => $offers));
+        return $this->render(':offer:_list_all_user.html.twig', array('offers' => $offers));
     }
 
     /**

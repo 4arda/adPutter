@@ -1,6 +1,6 @@
 {% extends "bootstrap.html.twig" %}
 
 {% block center %}
-    {{ include(':offer:list_all.html.twig') }}
+    {{ render(controller('AppBundle:Offer:listAll')) }}
 {% endblock %}
 

@@ -22,7 +22,7 @@ class CategoryController extends Controller
 
         $categories = $em->getRepository('AppBundle:Category')->findAll();
 
-        return $this->render('category/list_all.html.twig', array(
+        return $this->render('category/_list_all.html.twig', array(
             'categories' => $categories,
         ));
     }
@@ -32,7 +32,7 @@ class CategoryController extends Controller
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $categories = $em->getRepository("AppBundle:Category")->findOnlyUser($user->getId());
-        return $this->render('category/list_all_user.html.twig', array('categories' => $categories));
+        return $this->render('category/_list_all_user.html.twig', array('categories' => $categories));
     }
 
     /**

@@ -1,0 +1,20 @@
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Imageurl</th>
+        <th>Expiredate</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for offer in offers %}
+        <tr>
+            <td><a href="{{ path('offer_show', { 'id': offer.id }) }}">{{ offer.title }}</a></td>
+            <td>{{ offer.description }}</td>
+            <td><img height="100px" width="100px" src="{{ offer.imageUrl }}"></td>
+            <td>{% if offer.expireDate %}{{ offer.expireDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

@@ -14,6 +14,6 @@ class MainPageController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('mainPage/index.html.twig', array('name' => 'name'));
+        return $this->render('mainPage/index.html.twig');
     }
 }
