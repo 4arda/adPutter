@@ -32,9 +32,6 @@ class OfferController extends Controller
         ));
     }
 
-    /**
-     *
-     */
     public function showAllInCategoryAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -44,6 +41,14 @@ class OfferController extends Controller
         return $this->render('offer/index.html.twig', array(
             'offers' => $offers,
         ));
+    }
+
+    public function listUserOffersAction()
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $userOffers = $em->getRepository("AppBundle:Offer")->findBy(['user' => $user->getId()]);
+        return $this->render('offer/index.html.twig', array('offers' => $userOffers));
     }
 
     /**
