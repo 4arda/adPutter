@@ -32,10 +32,11 @@ class OfferRepository extends EntityRepository
                 'SELECT o, c FROM AppBundle:Offer o 
                       LEFT JOIN o.categories c
                       WHERE c.id =:id
-                      WHERE o.expireDate > :now
+                      AND o.expireDate > :now
                       ORDER BY o.createDate DESC'
             )
             ->setParameter('id', $id)
+            ->setParameter('now', new \DateTime())
             ->getResult();
     }
 
