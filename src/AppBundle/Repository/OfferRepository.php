@@ -12,6 +12,19 @@ use Doctrine\ORM\EntityRepository;
  */
 class OfferRepository extends EntityRepository
 {
+    public function findAllActual()
+    {
+        $now = new \DateTime();
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT o FROM AppBundle:Offer o 
+                      WHERE o.expireDate > :now 
+                      ORDER BY o.createDate DESC'
+            )
+            ->setParameter('now', $now->format("Y-m-d H:i:s"))
+            ->getResult();
+    }
+
     public function findAllByCategoryId($id)
     {
         return $this->getEntityManager()

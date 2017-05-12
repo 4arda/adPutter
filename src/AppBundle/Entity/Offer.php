@@ -42,7 +42,12 @@ class Offer
     private $imageUrl;
 
     /**
-     * @ORM\Column(name="expire_date", type="datetime")
+     * @ORM\Column(name="create_date", type="datetime")
+     */
+    private $createDate;
+
+    /**
+     * @ORM\Column(name="expire_date", type="datetime", nullable=true)
      */
     private $expireDate;
 
@@ -56,6 +61,14 @@ class Offer
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Category", inversedBy="offers")
      */
     private $categories;
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function doStuffOnPrePersist()
+    {
+        $this->createDate= new \DateTime();
+    }
 
     public function __construct()
     {
@@ -223,5 +236,28 @@ class Offer
     public function __toString()
     {
         return (string)$this->getId(). " ". $this->getTitle();
+    }
+
+    /**
+     * Set createDate
+     *
+     * @param \DateTime $createDate
+     * @return Offer
+     */
+    public function setCreateDate($createDate)
+    {
+        $this->createDate = $createDate;
+
+        return $this;
+    }
+
+    /**
+     * Get createDate
+     *
+     * @return \DateTime 
+     */
+    public function getCreateDate()
+    {
+        return $this->createDate;
     }
 }

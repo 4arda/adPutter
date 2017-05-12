@@ -118,12 +118,14 @@ class UserOfferController extends Controller
     {
         $user = $this->getUser();
         $offer = new Offer();
+        $offer->setExpireDate(new \DateTime());
         $form = $this->createForm('AppBundle\Form\OfferType', $offer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $offer->setUser($user);
+            $offer->setCreateDate(new \DateTime());
             $em->persist($offer);
             $em->flush();
 

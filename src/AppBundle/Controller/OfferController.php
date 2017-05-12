@@ -25,7 +25,7 @@ class OfferController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $offers = $em->getRepository('AppBundle:Offer')->findAll();
+        $offers = $em->getRepository('AppBundle:Offer')->findAllActual();
 
         return $this->render(':offer:_list_all.html.twig', array(
             'offers' => $offers,

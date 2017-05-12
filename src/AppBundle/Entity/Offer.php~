@@ -37,9 +37,14 @@ class Offer
     private $description;
 
     /**
-     * @ORM\Column(name="image_url", type="string", length=511)
+     * @ORM\Column(name="image_url", type="string", length=511, nullable=true)
      */
     private $imageUrl;
+
+    /**
+     * @ORM\Column(name="create_date", type="datetime")
+     */
+    private $createDate;
 
     /**
      * @ORM\Column(name="expire_date", type="datetime")
@@ -53,13 +58,13 @@ class Offer
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Category", mappedBy="offers")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Category", inversedBy="offers")
      */
     private $categories;
 
     public function __construct()
     {
-        $this->user = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     /**
@@ -180,10 +185,48 @@ class Offer
     /**
      * Get user
      *
-     * @return \AppBundle\Entity\User 
+     * @return \AppBundle\Entity\User
      */
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Add categories
+     *
+     * @param \AppBundle\Entity\Category $categories
+     * @return Offer
+     */
+    public function addCategory(\AppBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param \AppBundle\Entity\Category $categories
+     */
+    public function removeCategory(\AppBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    public function __toString()
+    {
+        return (string)$this->getId(). " ". $this->getTitle();
     }
 }
