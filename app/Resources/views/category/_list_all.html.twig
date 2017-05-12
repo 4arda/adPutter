@@ -1,12 +1,12 @@
 <div class="container-fluid">
     <h4>Categories list</h4>
     {% for category in categories %}
-        <ul>
+        <ul class="list-group">
             {% if not category.parent %}
-                <li><a href="{{ path('category_show', { 'id': category.id }) }}">{{ category.name }}</a>
-                    <ul>
+                <li class="list-group-item justify-content-between"><a href="{{ path('category_show', { 'id': category.id }) }}">{{ category.name }}</a>
+                    <ul class="list-group">
                         {% for category in category.children %}
-                            <li>
+                            <li class="list-group-item justify-content-between">
                                 <a href="{{ path('category_show', { 'id': category.id }) }}">{{ category.name }}</a>
                             </li>
                         {% endfor %}
