@@ -29,10 +29,11 @@ class OfferRepository extends EntityRepository
     {
         return $this->getEntityManager()
             ->createQuery(
-                'SELECT o, c FROM AppBundle:Offer o 
+                'SELECT o, c, p FROM AppBundle:Offer o 
                       LEFT JOIN o.categories c
-                      WHERE c.id =:id
-                      AND o.expireDate > :now
+                      LEFT JOIN c.parent p
+                      WHERE o.expireDate > :now
+                      AND c.id =:id OR p.id=:id
                       ORDER BY o.createDate DESC'
             )
             ->setParameter('id', $id)
