@@ -68,7 +68,7 @@ class UserOfferController extends Controller
             return $this->redirectToRoute('offer_edit', array('id' => $offer->getId()));
         }
 
-        return $this->render('offer/edit.html.twig', array(
+        return $this->render('user_offer/edit.html.twig', array(
             'offer' => $offer,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -118,7 +118,7 @@ class UserOfferController extends Controller
             return $this->redirectToRoute('app_useroffer_show', array('id' => $offer->getId()));
         }
 
-        return $this->render('offer/new.html.twig', array(
+        return $this->render('user_offer/new.html.twig', array(
             'offer' => $offer,
             'form' => $form->createView(),
         ));
