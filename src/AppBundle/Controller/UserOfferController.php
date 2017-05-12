@@ -28,6 +28,7 @@ class UserOfferController extends Controller
 
     /**
      * @Route("/category/{id}")
+     * @Method("GET")
      */
     public function showCategoryAction($id)
     {
@@ -43,6 +44,9 @@ class UserOfferController extends Controller
      */
     public function showAction(Offer $offer)
     {
+        if ($this->getUser()->getId() != $offer->getUser()->getid()) {
+            throw $this->createNotFoundException("Offer not found");
+        }
         $deleteForm = $this->createDeleteForm($offer);
         return $this->render('user_offer/show.html.twig', array(
             'offer' => $offer,
@@ -58,6 +62,10 @@ class UserOfferController extends Controller
      */
     public function editAction(Request $request, Offer $offer)
     {
+        if ($this->getUser()->getId() != $offer->getUser()->getid()) {
+            throw $this->createNotFoundException("Offer not found");
+        }
+
         $deleteForm = $this->createDeleteForm($offer);
         $editForm = $this->createForm('AppBundle\Form\OfferType', $offer);
         $editForm->handleRequest($request);
@@ -65,7 +73,7 @@ class UserOfferController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('offer_edit', array('id' => $offer->getId()));
+            return $this->redirectToRoute('app_useroffer_show', array('id' => $offer->getId()));
         }
 
         return $this->render('user_offer/edit.html.twig', array(
@@ -83,6 +91,10 @@ class UserOfferController extends Controller
      */
     public function deleteAction(Request $request, Offer $offer)
     {
+        if ($this->getUser()->getId() != $offer->getUser()->getid()) {
+            throw $this->createNotFoundException("Offer not found");
+        }
+
         $form = $this->createDeleteForm($offer);
         $form->handleRequest($request);
 
