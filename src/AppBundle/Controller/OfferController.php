@@ -43,7 +43,7 @@ class OfferController extends Controller
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-        $offers = $em->getRepository("AppBundle:Offer")->findBy(['user' => $user->getId()]);
+        $offers = $em->getRepository("AppBundle:Offer")->findAllUserOffers($user->getId());
         return $this->render(':offer:_list_all_user.html.twig', array('offers' => $offers));
     }
 

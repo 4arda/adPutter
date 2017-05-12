@@ -31,7 +31,9 @@ class OfferRepository extends EntityRepository
             ->createQuery(
                 'SELECT o, c FROM AppBundle:Offer o 
                       LEFT JOIN o.categories c
-                      WHERE c.id =:id'
+                      WHERE c.id =:id
+                      WHERE o.expireDate > :now
+                      ORDER BY o.createDate DESC'
             )
             ->setParameter('id', $id)
             ->getResult();
@@ -45,7 +47,8 @@ class OfferRepository extends EntityRepository
                 'SELECT o, c FROM AppBundle:Offer o 
                       LEFT JOIN o.categories c
                       WHERE c.id =:id
-                      AND o.user=:userId'
+                      AND o.user=:userId
+                      ORDER BY o.createDate DESC'
             )
             ->setParameter('id', $id)
             ->setParameter('userId', $userId)
@@ -60,6 +63,18 @@ class OfferRepository extends EntityRepository
                       WHERE o.id =:id AND o.user=:userId'
             )
             ->setParameter('id', $id)
+            ->setParameter('userId', $userId)
+            ->getResult();
+    }
+
+    public function findAllUserOffers($userId)
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT o FROM AppBundle:Offer o 
+                      WHERE o.user=:userId
+                      ORDER BY o.createDate DESC'
+            )
             ->setParameter('userId', $userId)
             ->getResult();
     }
