@@ -23,7 +23,7 @@ class UserOfferController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('user_offer/list_offers.html.twig');
+        return $this->render('user_offer/index.html.twig');
     }
 
     /**
