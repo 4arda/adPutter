@@ -71,7 +71,7 @@ fos_user:
     user_class: AppBundle\Entity\User
     from_email:
         address: "you@example.com"
-        sender_name: "you@example.com"
+        sender_name: "adPutter"
 easy_admin:
     entities:
         - AppBundle\Entity\User
