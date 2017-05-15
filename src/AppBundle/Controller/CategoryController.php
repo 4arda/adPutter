@@ -55,11 +55,14 @@ class CategoryController extends Controller
     /**
      * Finds and displays a category entity.
      *
-     * @Route("/{id}", name="category_show")
+     * @Route("/{id}.{name}", name="category_show", defaults={"name":"default_name"})
      * @Method("GET")
      */
-    public function showAction(Category $category)
+    public function showAction(Category $category, $name)
     {
+        if ($category->getName() != $name) {
+            return $this->redirectToRoute('category_show', ['id' => $category->getId(), 'name' => $category->getName()]);
+        }
         return $this->render('category/show.html.twig', array(
             'category' => $category,
         ));
