@@ -1,7 +1,7 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% if error %}
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    <div class="alert alert-warning">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
 <div class="col-sm-4">
 
@@ -28,7 +28,7 @@
                          value="on"/> {{ 'security.login.remember_me'|trans }}
                 </label>
             </div>
-            <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}"/>
+            <input class= "btn btn-success btn-block" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}"/>
         </form>
         <hr>
         <a href="{{ path('fos_user_resetting_request') }}">reset password</a>
