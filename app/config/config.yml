@@ -76,6 +76,14 @@ fos_user:
         sender_name: "adPutter"
 easy_admin:
     entities:
-        - AppBundle\Entity\User
-        - AppBundle\Entity\Offer
-        - AppBundle\Entity\Category
+        Offer:
+              class: AppBundle\Entity\Offer
+              form:
+                  fields:
+                        - 'title'
+                        - 'description'
+                        - 'imageUrl'
+                        - 'expireDate'
+                        - { property: 'createDate', type_options: { widget: 'choice' } }
+                        - { property: 'user', type: 'entity', type_options: { class: 'AppBundle\Entity\User' } }
+                        - { property: 'categories', type: 'entity', type_options: { class: 'AppBundle\Entity\Category', group_by: 'parent', multiple: true } }

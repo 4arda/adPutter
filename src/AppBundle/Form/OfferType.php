@@ -24,6 +24,7 @@ class OfferType extends AbstractType
                 'class' => 'AppBundle\Entity\Category',
                 'group_by' => 'parent',
                 'choice_label' => 'name',
+                'multiple' => true,
                 'placeholder' => 'Choose a Category',
                 'query_builder' => function (\Doctrine\ORM\EntityRepository $repo) {
                     $qb = $repo->createQueryBuilder('l');
