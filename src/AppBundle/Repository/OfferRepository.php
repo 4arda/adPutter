@@ -46,10 +46,11 @@ class OfferRepository extends EntityRepository
 
         return $this->getEntityManager()
             ->createQuery(
-                'SELECT o, c FROM AppBundle:Offer o 
+                'SELECT o FROM AppBundle:Offer o 
                       LEFT JOIN o.categories c
-                      WHERE c.id =:id
-                      AND o.user=:userId
+                      LEFT JOIN c.parent p
+                      WHERE o.user=:userId
+                      AND (c.id =:id OR p.id=:id)
                       ORDER BY o.createDate DESC'
             )
             ->setParameter('id', $id)
