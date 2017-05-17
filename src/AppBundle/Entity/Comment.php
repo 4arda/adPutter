@@ -31,9 +31,9 @@ class Comment
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createdAt", type="datetime")
+     * @ORM\Column(name="create_date", type="datetime", nullable=true)
      */
-    private $createdDate;
+    private $createDate;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="comments")
@@ -87,27 +87,27 @@ class Comment
     }
 
     /**
-     * Set createdDate
+     * Set createDate
      *
-     * @param \DateTime $createdDate
+     * @param \DateTime $createDate
      *
      * @return Comment
      */
-    public function setCreatedDate($createdDate)
+    public function setCreateDate($createDate)
     {
-        $this->createdAt = $createdDate;
+        $this->createDate = $createDate;
 
         return $this;
     }
 
     /**
-     * Get createdDate
+     * Get createDate
      *
      * @return \DateTime
      */
-    public function getCreatedDate()
+    public function getCreateDate()
     {
-        return $this->createdDate;
+        return $this->createDate;
     }
 
     /**

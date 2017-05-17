@@ -1,0 +1,22 @@
+<h1>Comments list</h1>
+
+{% for comment in comments %}
+    <div class="row">
+        <div class="col-md-2 text-center">
+            {% if comment.user %}
+            <p>{{ comment.user.username }}</p>
+            {% else %}
+            <p>Gość</p>
+            {% endif %}
+        </div>
+        <div class="col-md-8 text-left">
+            <p>{{ comment.text }}</p>
+
+        </div>
+        <div class="col-md-2 text-right">
+            <p>{% if comment.createDate %}{{ comment.createDate|date('Y-m-d H:i:s') }}{% endif %}</p>
+
+        </div>
+
+    </div>
+{% endfor %}
