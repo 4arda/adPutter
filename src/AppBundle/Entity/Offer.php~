@@ -47,7 +47,7 @@ class Offer
     private $createDate;
 
     /**
-     * @ORM\Column(name="expire_date", type="datetime")
+     * @ORM\Column(name="expire_date", type="datetime", nullable=true)
      */
     private $expireDate;
 
@@ -62,9 +62,23 @@ class Offer
      */
     private $categories;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="offer")
+     */
+    private $comments;
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function doStuffOnPrePersist()
+    {
+        $this->createDate= new \DateTime();
+    }
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -228,5 +242,28 @@ class Offer
     public function __toString()
     {
         return (string)$this->getId(). " ". $this->getTitle();
+    }
+
+    /**
+     * Set createDate
+     *
+     * @param \DateTime $createDate
+     * @return Offer
+     */
+    public function setCreateDate($createDate)
+    {
+        $this->createDate = $createDate;
+
+        return $this;
+    }
+
+    /**
+     * Get createDate
+     *
+     * @return \DateTime 
+     */
+    public function getCreateDate()
+    {
+        return $this->createDate;
     }
 }

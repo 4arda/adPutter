@@ -77,6 +77,12 @@ fos_user:
         sender_name: "adPutter"
 easy_admin:
     entities:
+        Category:
+              class: AppBundle\Entity\Category
+        Comment:
+              class: AppBundle\Entity\Comment
+        User:
+              class: AppBundle\Entity\User
         Offer:
               class: AppBundle\Entity\Offer
               form:

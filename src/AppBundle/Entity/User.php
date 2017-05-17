@@ -24,10 +24,16 @@ class User extends BaseUser
      */
     protected $offers;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="user")
+     */
+    protected $comments;
+
     public function __construct()
     {
         parent::__construct();
         $this->offers = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -61,5 +67,39 @@ class User extends BaseUser
     public function getOffers()
     {
         return $this->offers;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     *
+     * @return User
+     */
+    public function addComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     */
+    public function removeComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }
