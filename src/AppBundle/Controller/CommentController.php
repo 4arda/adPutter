@@ -38,7 +38,7 @@ class CommentController extends Controller
 
             $comments = $em->getRepository('AppBundle:Comment')->findBy(['offer' => $id]);
 
-            return $this->render('comment/show_for_offer.html.twig', array(
+            return $this->render('comment/_list_for_offer.html.twig', array(
                 'comments' => $comments,
             ));
         }

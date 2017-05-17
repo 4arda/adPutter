@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * Comment
  *
@@ -46,11 +47,6 @@ class Comment
      * @ORM\JoinColumn(name="offer_id", referencedColumnName="id")
      */
     private $offer;
-
-    public function doStuffOnPrePersist()
-    {
-        $this->createDate= new \DateTime();
-    }
 
     /**
      * Get id

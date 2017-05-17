@@ -67,13 +67,6 @@ class Offer
      */
     private $comments;
 
-    /**
-     * @ORM\PrePersist
-     */
-    public function doStuffOnPrePersist()
-    {
-        $this->createDate= new \DateTime();
-    }
 
     public function __construct()
     {
