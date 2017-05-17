@@ -1,11 +1,41 @@
 {% extends "bootstrap.html.twig" %}
+{% block left %}
+    {{ render(controller('AppBundle:Category:listAll')) }}
+{% endblock %}
 {% block center %}
-    <a href="{{ path('app_mainpage_index') }}">Back to the list</a>
-    <p>Oferta ważna do {% if offer.expireDate %}{{ offer.expireDate|date('Y-m-d H:i:s') }}{% endif %}</p>
-    <hr>
-    <h1>{{ offer.title }}</h1>
-    <hr>
-    <p>{{ offer.description }}</p>
-    <hr>
-    <img height="100%" width="100%" src="{{ offer.imageUrl }}"/>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-9">
+                <h1>{{ offer.title }}</h1>
+                <p>Oferta ważna do {% if offer.expireDate %}{{ offer.expireDate|date('Y-m-d H:i:s') }}{% endif %}</p>
+            </div>
+            <div class="col-md-3">
+                <div class="well">
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <hr>
+            <p>{{ offer.description }}</p>
+            <hr>
+        </div>
+        <div class="row">
+            <!-- Trigger the Modal -->
+            <img id="myImg" src="{{ offer.imageUrl }}" alt="{{ offer.title }}" width="200" height="200">
+
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+
+                <!-- The Close Button -->
+                <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+
+                <!-- Modal Content (The Image) -->
+                <img class="modal-content" id="img01">
+
+                <!-- Modal Caption (Image Text) -->
+                <div id="caption"></div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
