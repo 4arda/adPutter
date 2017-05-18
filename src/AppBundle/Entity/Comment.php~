@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * Comment
  *
@@ -31,9 +32,9 @@ class Comment
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createdAt", type="datetime")
+     * @ORM\Column(name="create_date", type="datetime", nullable=true)
      */
-    private $createdDate;
+    private $createDate;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="comments")
@@ -47,10 +48,10 @@ class Comment
      */
     private $offer;
 
-    public function doStuffOnPrePersist()
-    {
-        $this->createDate= new \DateTime();
-    }
+    /**
+     * @ORM\Column(name="email_send", type="boolean", nullable=true)
+     */
+    private $emailSend;
 
     /**
      * Get id
@@ -87,27 +88,74 @@ class Comment
     }
 
     /**
-     * Set createdDate
+     * Set createDate
      *
-     * @param \DateTime $createdDate
+     * @param \DateTime $createDate
      *
      * @return Comment
      */
-    public function setCreatedDate($createdDate)
+    public function setCreateDate($createDate)
     {
-        $this->createdAt = $createdDate;
+        $this->createDate = $createDate;
 
         return $this;
     }
 
     /**
-     * Get createdDate
+     * Get createDate
      *
      * @return \DateTime
      */
-    public function getCreatedDate()
+    public function getCreateDate()
     {
-        return $this->createdDate;
+        return $this->createDate;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Comment
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set offer
+     *
+     * @param \AppBundle\Entity\Offer $offer
+     *
+     * @return Comment
+     */
+    public function setOffer(\AppBundle\Entity\Offer $offer = null)
+    {
+        $this->offer = $offer;
+
+        return $this;
+    }
+
+    /**
+     * Get offer
+     *
+     * @return \AppBundle\Entity\Offer
+     */
+    public function getOffer()
+    {
+        return $this->offer;
     }
 }
-

@@ -3,6 +3,7 @@
 namespace AppBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
@@ -30,16 +31,19 @@ class SendEmailCommand extends ContainerAwareCommand
         ]);
 
         $em = $this->getContainer()->get('doctrine')->getManager();
-        $comments = $em->getRepository('AppBundle:Comment')->findBy([
-            'createDate' => true
-        ]);
+        $comments = $em->getRepository('AppBundle:Comment')->findAll();
 
-        $message = \Swift_Message::newInstance()
-            ->setSubject('Hello Email')
-            ->setFrom('send@example.com')
-            ->setTo('example@example.com')
-            ->setBody('body body body alwyas body');
-        /*
+        $mailer = $this->getContainer()->get('mailer');
+
+        $sendEmailsCount = 0;
+        $sendEmialErrorsCount = 0;
+        foreach ($comments as $comment) {
+
+            $message = \Swift_Message::newInstance()
+                ->setSubject('New Comment')
+                ->setFrom('adPutter.team@adputter.com')
+                ->setTo($comment->getOffer()->getUser()->getEmail())
+                ->setBody($comment->getText());/*
              * If you also want to include a plaintext version of the message
             ->addPart(
                 $this->renderView(
@@ -48,10 +52,20 @@ class SendEmailCommand extends ContainerAwareCommand
                 ),
                 'text/plain'
             )
-            */
-        ;
+            */;
+            try {
+                $mailer->send($message);
+                $sendEmailsCount ++;
+                $comment->setEmailSend(true);
+                $em->flush();
+            } catch (Exception $e) {
+                $sendEmialErrorsCount++;
+            }
+        }
 
-        $mailer = $this->getContainer()->get('mailer');
-        $mailer->send($message);
+        $output->writeln([
+            'Emails send: ' . $sendEmailsCount,
+            'Problems with sending: ' . $sendEmialErrorsCount
+        ]);
     }
 }

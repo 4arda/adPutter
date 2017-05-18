@@ -10,4 +10,14 @@ namespace AppBundle\Repository;
  */
 class CommentRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findNotSend()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT c, c.offer, u FROM AppBundle:Comment c 
+                      JOIN c.offer o
+                      JOIN o.user u'
+            )
+            ->getResult();
+    }
 }

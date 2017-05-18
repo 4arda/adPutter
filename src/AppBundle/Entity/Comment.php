@@ -49,6 +49,11 @@ class Comment
     private $offer;
 
     /**
+     * @ORM\Column(name="email_send", type="boolean", nullable=true)
+     */
+    private $emailSend;
+
+    /**
      * Get id
      *
      * @return int
@@ -152,5 +157,29 @@ class Comment
     public function getOffer()
     {
         return $this->offer;
+    }
+
+    /**
+     * Set emailSend
+     *
+     * @param boolean $emailSend
+     *
+     * @return Comment
+     */
+    public function setEmailSend($emailSend)
+    {
+        $this->emailSend = $emailSend;
+
+        return $this;
+    }
+
+    /**
+     * Get emailSend
+     *
+     * @return boolean
+     */
+    public function getEmailSend()
+    {
+        return $this->emailSend;
     }
 }
