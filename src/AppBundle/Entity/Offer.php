@@ -63,7 +63,7 @@ class Offer
     private $categories;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="offer")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="offer", cascade={"remove"})
      */
     private $comments;
 
