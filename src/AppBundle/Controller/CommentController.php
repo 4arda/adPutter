@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Comment controller.
@@ -86,6 +87,7 @@ class CommentController extends Controller
      *
      * @Route("/{id}", name="comment_show")
      * @Method("GET")
+     * @Security("has_role('ROLE_USER')")
      */
     public function showAction(Comment $comment)
     {
@@ -102,6 +104,7 @@ class CommentController extends Controller
      *
      * @Route("/{id}/edit", name="comment_edit")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
      */
     public function editAction(Request $request, Comment $comment)
     {
@@ -127,6 +130,7 @@ class CommentController extends Controller
      *
      * @Route("/{id}", name="comment_delete")
      * @Method("DELETE")
+     * @Security("has_role('ROLE_USER')")
      */
     public function deleteAction(Request $request, Comment $comment)
     {
