@@ -14,9 +14,10 @@ class CommentRepository extends \Doctrine\ORM\EntityRepository
     {
         return $this->getEntityManager()
             ->createQuery(
-                'SELECT c, c.offer, u FROM AppBundle:Comment c 
+                'SELECT c, o, u FROM AppBundle:Comment c 
                       JOIN c.offer o
-                      JOIN o.user u'
+                      JOIN o.user u
+                      WHERE c.emailSend <> true'
             )
             ->getResult();
     }

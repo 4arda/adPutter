@@ -31,41 +31,48 @@ class SendEmailCommand extends ContainerAwareCommand
         ]);
 
         $em = $this->getContainer()->get('doctrine')->getManager();
-        $comments = $em->getRepository('AppBundle:Comment')->findAll();
+
+        $comments = $em->getRepository('AppBundle:Comment')->findNotSend();
 
         $mailer = $this->getContainer()->get('mailer');
 
         $sendEmailsCount = 0;
-        $sendEmialErrorsCount = 0;
+        $sendEmailsErrorsCount = 0;
+
         foreach ($comments as $comment) {
 
+            $offer = $comment->getOffer();
+            $offerOwner = $offer->getUser();
+
             $message = \Swift_Message::newInstance()
-                ->setSubject('New Comment')
+                ->setSubject('New Comment Offer: ' . $offer->getId())
                 ->setFrom('adPutter.team@adputter.com')
-                ->setTo($comment->getOffer()->getUser()->getEmail())
+                ->setTo($offerOwner->getEmail())
                 ->setBody($comment->getText());/*
-             * If you also want to include a plaintext version of the message
-            ->addPart(
-                $this->renderView(
-                    'Emails/registration.txt.twig',
-                    array('name' => $name)
-                ),
-                'text/plain'
-            )
-            */;
+                 * If you also want to include a plaintext version of the message
+                ->addPart(
+                    $this->renderView(
+                        'Emails/registration.txt.twig',
+                        array('name' => $name)
+                    ),
+                    'text/plain'
+                )
+                */;
             try {
+
                 $mailer->send($message);
-                $sendEmailsCount ++;
                 $comment->setEmailSend(true);
                 $em->flush();
+                $sendEmailsCount ++;
+
             } catch (Exception $e) {
-                $sendEmialErrorsCount++;
+                $sendEmailsErrorsCount++;
             }
         }
 
         $output->writeln([
             'Emails send: ' . $sendEmailsCount,
-            'Problems with sending: ' . $sendEmialErrorsCount
+            'Problems with sending: ' . $sendEmailsErrorsCount
         ]);
     }
 }
